@@ -1,0 +1,99 @@
+/*menu.css */
+div {
+	border: 2px solid black;
+    background: green;
+    margin-top: 10px 
+    margin-bottom: 5px;
+    margin-right: 5px;
+    margin-left: 0px;
+    padding: 5px;
+
+
+
+}
+body {
+    background: black;
+}
+div p{
+	color:black;
+	background: orange;
+	padding: 5px;
+	margin: 5px;
+}
+
+#parentDiv {
+    margin-top: 10px ;
+    position: fixed;
+    clear: left; 
+	float: right;
+	border: 2px solid black;
+    width: 20%;
+    background: purple;
+    margin-top: 0px; 
+    margin-bottom: 0px;
+    margin-right: -5px;
+    margin-left: -1px;
+    padding: 5px;
+    border: 0px;
+}
+#div1 {
+    clear: left;
+    float right;
+    margin-left: -5px;
+    margin-bottom: 5px;
+}
+#div1 p{
+
+}
+#div2 {
+    clear: left;
+    float right;
+    margin-left: -5px;
+    margin-bottom: 5px;
+}
+#div3 {
+    clear: left;
+    float right;
+    margin-left: -5px;
+    margin-bottom: 5px;
+}
+#div4 {
+    clear: left;
+    float right;
+    margin-left: -5px;
+    margin-bottom: 5px;
+
+}
+#info {
+    border: 0px;
+    position: relative; left: 25%;
+    float:left;
+    text-align: center;
+	width: 50%;
+}
+#heading1{
+
+}
+#blank{
+    margin-top: 0px; 
+    margin-bottom: 0px;
+    margin-right: -5px;
+    margin-left: -1px;
+    padding: -50px;
+    clear right;
+    clear left;
+    background: purple;
+    text-align: center;
+    border: 1px solid purple;
+    padding: -1px;
+}
+#blank header{
+
+    background: orange;
+    padding: 0px;
+}
+#spook{
+    position: fixed, left 75%;
+    float: right;
+    background: black;
+}
