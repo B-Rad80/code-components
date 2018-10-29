@@ -21,11 +21,12 @@ from django.views.generic import TemplateView
 
 from accounts import views as accounts_views
 from boards import views
-
+from address import views as address_views
 urlpatterns = [
-	url(r'^$', views.home, name='home'),
-	#url(r'^$', TemplateView.as_view(template_name='menu.html')),
-	url(r'^signup/$', accounts_views.signup, name='signup'),
+	path('', views.home, name='home'),
+    path('address/',address_views.address, name = 'address'),
+    path('address/polls/', include('polls.urls')),
+	path('contact/', accounts_views.contact, name='contact'),
 	path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
-]
+    ]
