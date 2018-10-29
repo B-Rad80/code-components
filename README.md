@@ -80,10 +80,12 @@ Now check out your super cool /admin page
 Now you're ready to start working, the main code is stored inside the mysite folder
 
 <><><><><><><><><><><>CONFIGURE HUBZONE DESIGNATION DATABASE<><><><><><><><><><><>
+This steps postgres databases that hold the designations for every county and tract.
+
 
 Within PSQL:
  CREATE DATABASE hub_designations;
-Make sure it exists:
+Make sure it was created correctly:
 # \l
 Switch to hub_designations database
 # \c hub_designations
@@ -95,3 +97,5 @@ Copy the CSV files to the tables. Replace '???' with the *absolute* path to the 
 # COPY tract_designations FROM '/???/tract_designations.csv' DELIMITER ',' CSV HEADER;
 Add django user
 # CREATE ROLE django WITH SUPERUSER LOGIN PASSWORD 'DUHJANGO';
+
+That should be all you need to get this working. You can test it by running the server and visiting 127.0.0.1:8000/hubQuery/
