@@ -84,18 +84,31 @@ This steps postgres databases that hold the designations for every county and tr
 
 
 Within PSQL:
- CREATE DATABASE hub_designations;
-Make sure it was created correctly:
-# \l
-Switch to hub_designations database
-# \c hub_designations
-Create county_designations and tract_designations tables
-# CREATE TABLE if not exists county_designations (county_code text not null, county_name text not null, july_2017_status text, january_2018_status text);
-# CREATE TABLE if not exists tract_designations (tract_code TEXT not null, january_2017_status text, january_2018_status text);
-Copy the CSV files to the tables. Replace '???' with the *absolute* path to the file. The files are included in code-components.
-# COPY county_designations FROM '/???/county_designation.csv' DELIMITER ',' CSV HEADER;
-# COPY tract_designations FROM '/???/tract_designations.csv' DELIMITER ',' CSV HEADER;
-Add django user
-# CREATE ROLE django WITH SUPERUSER LOGIN PASSWORD 'DUHJANGO';
 
-That should be all you need to get this working. You can test it by running the server and visiting 127.0.0.1:8000/hubQuery/
+```CREATE DATABASE hub_designations;```
+
+Make sure it was created correctly:
+
+``` \l```
+
+Switch to hub_designations database:
+
+```\c hub_designations```
+
+Create county_designations and tract_designations tables
+
+```CREATE TABLE if not exists county_designations (county_code text not null, county_name text not null, july_2017_status text, january_2018_status text);```
+
+```CREATE TABLE if not exists tract_designations (tract_code TEXT not null, january_2017_status text, january_2018_status text);```
+
+Copy the CSV files to the tables. Replace '???' with the \*absolute\* path to the file. The files are included in code-components.
+
+```COPY county_designations FROM '/???/county_designation.csv' DELIMITER ',' CSV HEADER;```
+
+```COPY tract_designations FROM '/???/tract_designations.csv' DELIMITER ',' CSV HEADER;```
+
+Add django user
+
+```CREATE ROLE django WITH SUPERUSER LOGIN PASSWORD 'DUHJANGO';```
+
+That should be all you need to get this working. You can test it by running the server and visiting [127.0.0.1:8000/hubQuery/](127.0.0.1:8000/hubQuery/)
