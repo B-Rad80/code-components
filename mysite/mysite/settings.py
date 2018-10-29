@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'accounts',
     'boards',
+    'hubQuery',
 ]
 
 MIDDLEWARE = [

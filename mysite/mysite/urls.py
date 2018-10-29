@@ -21,11 +21,13 @@ from django.views.generic import TemplateView
 
 from accounts import views as accounts_views
 from boards import views
+from hubQuery import views as hubQuery_views
 
 urlpatterns = [
 	url(r'^$', views.home, name='home'),
 	#url(r'^$', TemplateView.as_view(template_name='menu.html')),
 	url(r'^signup/$', accounts_views.signup, name='signup'),
 	path('polls/', include('polls.urls')),
+	url(r'^hubQuery/$', hubQuery_views.hubQuery, name='hubQuery'),
     path('admin/', admin.site.urls),
 ]
