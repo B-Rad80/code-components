@@ -56,7 +56,7 @@ quit
 
 <><><><><><><><><><><>CONNECT DJANGO TO DATABASE<><><><><><><><><><><>
 Next you need to connect your DB eiteher Postgresql or mysql to Django by editing the settings.py file in the mysite app folder
-In settings .py change this code to point to your local server 
+In settings .py change this code to point to your local server
 Defualt is using pointing to postgresql change django.db.backends.postgresql_psycopg2 to django.db.backends.mysql-connector -not sure about this one, but does include support for mysql through that plugin
 //
 'default': {
@@ -79,3 +79,43 @@ Now check out your super cool /admin page
 
 Now you're ready to start working, the main code is stored inside the mysite folder
 
+<><><><><><><><><><><>CONFIGURE HUBZONE DESIGNATION DATABASE<><><><><><><><><><><>
+
+### These steps create postgres databases that hold the designations for every county and tract.
+
+
+##### Within PSQL:
+
+    CREATE DATABASE hub_designations;
+
+##### Make sure it was created correctly:
+
+    \l
+
+##### Switch to hub_designations database:
+
+    \c hub_designations
+
+##### Create county_designations and tract_designations tables
+
+    CREATE TABLE if not exists county_designations (county_code text not null, county_name text not null, july_2017_status text, january_2018_status text);
+
+    CREATE TABLE if not exists tract_designations (tract_code TEXT not null, january_2017_status text, january_2018_status text);
+
+##### Copy the CSV files to the tables. Replace '???' with the *absolute* path to the file. The files are included in code-components.
+
+    COPY county_designations FROM '/???/county_designation.csv' DELIMITER ',' CSV HEADER;
+
+    COPY tract_designations FROM '/???/tract_designations.csv' DELIMITER ',' CSV HEADER;
+
+##### If those COPY commands give you an error, you can try these instead. These commands supposedly allow you to use a *relative path*, but I haven't tested it, so I'd try using the path starting at your home directory (~/.../county_designation.csv) or the absolute path (/.../county_designation.csv):
+
+    \copy county_designations FROM ‘/?RELATIVE_PATH?/county_designation.csv’ DELIMITER ‘,’ CSV HEADER;
+
+    \copy tract_designations FROM ‘/?RELATIVE_PATH?/county_designation.csv’ DELIMITER ‘,’ CSV HEADER;
+
+Add django user
+
+    CREATE ROLE django WITH SUPERUSER LOGIN PASSWORD 'DUHJANGO';
+
+That should be all you need to get this working. You can test it by running the server and visiting [127.0.0.1:8000/hubQuery/](127.0.0.1:8000/hubQuery/)

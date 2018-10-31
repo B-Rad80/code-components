@@ -41,7 +41,11 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'accounts',
     'boards',
+<<<<<<< HEAD
     'address',
+=======
+    'hubQuery',
+>>>>>>> origin/merge_master
 ]
 
 MIDDLEWARE = [
