@@ -81,7 +81,7 @@ Now you're ready to start working, the main code is stored inside the mysite fol
 
 <><><><><><><><><><><>CONFIGURE HUBZONE DESIGNATION DATABASE<><><><><><><><><><><>
 
-This steps create postgres databases that hold the designations for every county and tract.
+These steps create postgres databases that hold the designations for every county and tract.
 
 
 Within PSQL:

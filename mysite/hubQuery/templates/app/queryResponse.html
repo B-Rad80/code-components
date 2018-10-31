@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Test Submit</title>
+    <title>HubZone Query</title>
   </head>
   <body>
-    <h1>Test Submit</h1>
+    <h1>HubZone Query</h1>
 
     <form action="/hubQuery/" method="post">
       {% csrf_token %}
@@ -15,7 +15,9 @@
       <input type="submit" value="submit">
     </form>
     {% if reqSuccess %}
-    <table>
+    <br>
+    <br>
+    <table cellpadding="10" bgcolor="#f7f7f7">
       <tr>
         {% if loc.designated %}
         <th bgcolor="#B2ED9D" colspan="5">Designated HubZone</th>
@@ -24,21 +26,26 @@
         {% endif %}
       </tr>
       <tr>
-        <td></td>
-        <th>Name</th>
-        <th>2017</th>
-        <th>2018</th>
-        <th>More Info</th>
+        <td colspan="4">Interpreted Address: {{ loc.faddress }}</td>
       </tr>
       <tr>
-        <th>County</th>
-        <td>{{ loc.designationInfo.county.name }}</td>
+        <th colspan="2" bgColor="#ededed">Area</th>
+        <th bgColor="#ededed">Designation</th>
+        <th bgColor="#ededed">More Info</th>
+      </tr>
+      <tr>
+        <th rowspan="2" bgcolor="#ededed">{{ loc.designationInfo.county.name }}</th>
+        <th>2017</th>
         {% if loc.designationInfo.county.prevYearDes %}
         <td bgcolor="#B2ED9D">Designated</th>
         {% else %}
         <td bgcolor="#EDAB9D">Not Designated</th>
         {% endif %}
 
+        <td>{{ loc.designationInfo.county.prevYearReason }}</td>
+      </tr>
+      <tr>
+        <th>2018</th>
         {% if loc.designationInfo.county.currYearDes %}
         <td bgcolor="#B2ED9D">Designated</th>
         {% else %}
@@ -48,30 +55,24 @@
         <td>{{ loc.designationInfo.county.currYearReason }}</td>
       </tr>
       <tr>
-        <th>Tract</th>
-        <td bgcolor="#dbdbdb"></td>
+        <th rowspan="2" bgcolor="#ededed">Census Tract</th>
+        <th>2017</th>
 
         {% if loc.designationInfo.tract.prevYearDes %}
         <td bgcolor="#B2ED9D">Designated</th>
         {% else %}
         <td bgcolor="#EDAB9D">Not Designated</th>
         {% endif %}
-
+        <td rowspan="2">Census Tract: {{loc.tractCode}}
+      </tr>
+      <tr>
+        <th>2018</th>
         {% if loc.designationInfo.tract.currYearDes %}
         <td bgcolor="#B2ED9D">Designated</th>
         {% else %}
         <td bgcolor="#EDAB9D">Not Designated</th>
         {% endif %}
-
-        <td bgcolor="#dbdbdb"></td>
       </tr>
-
-    <p>Interpreted Address: {{ loc.faddress }}</p>
-    <p>Tract code: {{ loc.tractCode }}</p>
-    <p>County code: {{ loc.countyCode}}</p>
-    <br>
-    <p>Designated hub zone: {{ loc.designated }}</p>
-
     {% endif %}
   </body>
 </html>
