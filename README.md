@@ -81,34 +81,34 @@ Now you're ready to start working, the main code is stored inside the mysite fol
 
 <><><><><><><><><><><>CONFIGURE HUBZONE DESIGNATION DATABASE<><><><><><><><><><><>
 
-#### These steps create postgres databases that hold the designations for every county and tract.
+### These steps create postgres databases that hold the designations for every county and tract.
 
 
-###### Within PSQL:
+##### Within PSQL:
 
     CREATE DATABASE hub_designations;
 
-###### Make sure it was created correctly:
+##### Make sure it was created correctly:
 
     \l
 
-###### Switch to hub_designations database:
+##### Switch to hub_designations database:
 
     \c hub_designations
 
-###### Create county_designations and tract_designations tables
+##### Create county_designations and tract_designations tables
 
     CREATE TABLE if not exists county_designations (county_code text not null, county_name text not null, july_2017_status text, january_2018_status text);
 
     CREATE TABLE if not exists tract_designations (tract_code TEXT not null, january_2017_status text, january_2018_status text);
 
-###### Copy the CSV files to the tables. Replace '???' with the \*absolute\* path to the file. The files are included in code-components.
+##### Copy the CSV files to the tables. Replace '???' with the *absolute* path to the file. The files are included in code-components.
 
     COPY county_designations FROM '/???/county_designation.csv' DELIMITER ',' CSV HEADER;
 
     COPY tract_designations FROM '/???/tract_designations.csv' DELIMITER ',' CSV HEADER;
 
-If those COPY commands give you an error, you can try these instead. These commands supposedly allow you to use a \*relative path\*, but I haven't tested it, so I'd try using the path starting at your home directory (~/.../county_designation.csv) or the absolute path (/.../county_designation.csv):
+##### If those COPY commands give you an error, you can try these instead. These commands supposedly allow you to use a *relative path*, but I haven't tested it, so I'd try using the path starting at your home directory (~/.../county_designation.csv) or the absolute path (/.../county_designation.csv):
 
     \copy county_designations FROM ‘/?RELATIVE_PATH?/county_designation.csv’ DELIMITER ‘,’ CSV HEADER;
 
