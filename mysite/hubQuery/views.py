@@ -17,13 +17,13 @@ def hubQuery(request):
 			addr_in = form.cleaned_data['addr_in']
 			loc = getInHub.location(addr_in)
             # redirect to a new URL:
-			return render(request, 'app/queryResponse.html', {'reqSuccess':True, 'loc':loc})
+			return render(request, 'app/queryResponseZip.html', {'reqSuccess':True, 'loc':loc})
 
     # if a GET (or any other method) we'll create a blank form
 	else:
 		#form = TestForm()
 
-		return render(request, 'app/queryResponse.html')
+		return render(request, 'app/queryResponseZip.html')
 
 
 
