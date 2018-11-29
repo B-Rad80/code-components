@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HubZone Query</title>
+    <link rel="stylesheet" href="../../static/hubQuery/CSS/Zip.css">
+  </head>
+  <body>
+
+
+    <img id="logo" class = "left" src = "../../static/hubQuery/Image/logo.png">
+    <div id="bar" style = "background-color: #333; position:fixed; height:50px; width:100%; margin-top: -12px"></div>
+
+    <<div class="navbar">
+  <a href="" style="background-color: #4CAF50">Home</a>
+  <a href="">Sign In</a>
+  <a href="">Sign Up</a>
+  <div class="dropdown">
+    <button class="dropbtn">Sort By 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">First Name</a>
+      <a href="#">Last Name</a>
+      <a href="#">In a HubZone</a>
+    </div>
+  </div> 
+</div>
+    
+
+    <div id = "main">
+    <h1>HubZone Query</h1>
+
+    <form action="/hubQuery/" method="post">
+      {% csrf_token %}
+      <label for="addr_in">Upload Zipped Files: </label>
+      <input id="addr_in" type="text" name="addr_in"><br>
+      </br>
+      <input type="submit" value="submit">
+    </form>
+    {% if reqSuccess %}
+    <br>
+    <br>
+    <table cellpadding="10" bgcolor="#f7f7f7">
+      <tr>
+        {% if loc.designated %}
+        <th bgcolor="#B2ED9D" colspan="5">Designated HubZone</th>
+        {% else %}
+        <th bgcolor="#EDAB9D" colspan="5">Not A Designated HubZone</th>
+        {% endif %}
+      </tr>
+      <tr>
+        <td colspan="4">Interpreted Address: {{ loc.faddress }}</td>
+      </tr>
+      <tr>
+        <th colspan="2" bgColor="#ededed">Area</th>
+        <th bgColor="#ededed">Designation</th>
+        <th bgColor="#ededed">More Info</th>
+      </tr>
+      <tr>
+        <th rowspan="2" bgcolor="#ededed">{{ loc.designationInfo.county.name }}</th>
+        <th>2017</th>
+        {% if loc.designationInfo.county.prevYearDes %}
+        <td bgcolor="#B2ED9D">Designated</td>
+        {% else %}
+        <td bgcolor="#EDAB9D">Not Designated</td>
+        {% endif %}
+
+        <td>{{ loc.designationInfo.county.prevYearReason }}</td>
+      </tr>
+      <tr>
+        <th>2018</th>
+        {% if loc.designationInfo.county.currYearDes %}
+        <td bgcolor="#B2ED9D">Designated</td>
+        {% else %}
+        <td bgcolor="#EDAB9D">Not Designated</td>
+        {% endif %}
+
+        <td>{{ loc.designationInfo.county.currYearReason }}</td>
+      </tr>
+      <tr>
+        <th rowspan="2" bgcolor="#ededed">Census Tract</th>
+        <th>2017</th>
+
+        {% if loc.designationInfo.tract.prevYearDes %}
+        <td bgcolor="#B2ED9D">Designated</td>
+        {% else %}
+        <td bgcolor="#EDAB9D">Not Designated</td>
+        {% endif %}
+        <td rowspan="2">Census Tract: {{loc.tractCode}}
+      </tr>
+      <tr>
+        <th>2018</th>
+        {% if loc.designationInfo.tract.currYearDes %}
+        <td bgcolor="#B2ED9D">Designated</td>
+        {% else %}
+        <td bgcolor="#EDAB9D">Not Designated</td>
+        {% endif %}
+      </tr>
+    {% endif %}
+<!/--
+    <p>
+      This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.This is just gibberish to make the page longer.
+    </p>
+  -->
+  </div>
+  </body>
+</html>
