@@ -29,5 +29,6 @@ urlpatterns = [
 	url(r'^signup/$', accounts_views.signup, name='signup'),
 	path('polls/', include('polls.urls')),
 	url(r'^hubQuery/$', hubQuery_views.hubQuery, name='hubQuery'),
+    url(r'^massQuery/$', hubQuery_views.massQuery, name='massQuery'),
     path('admin/', admin.site.urls),
 ]

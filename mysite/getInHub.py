@@ -46,6 +46,7 @@ class location():
     tractCode = "0" #tract and county codes
     countyCode = "0"
     designated = False
+    applicantName = "" # The name of the person associated with the address
     designationInfo = {    'county':{ 'name':"", 'prevYearDes':False, 'currYearDes':False, 'prevYearReason':"", 'currYearReason':""},
                 'tract':{ 'prevYearDes':False, 'currYearDes':False} }
 
@@ -65,22 +66,11 @@ class location():
             self.designationInfo = designation.getDesignation(self.countyCode,self.tractCode) #pulls designation from database
             self.designated = self.designationInfo['county']['currYearDes'] or self.designationInfo['tract']['currYearDes'] #sets overall designation to true or false
 
+    def setName(self, name):
+        if type(name) != str:
+            raise ValueError('name must be type str')
+        self.applicantName = name
 
-    # if addr in constructor was left blank, this can be used to set the
-    #location using coordinates. It can take input str or float as input
-    def setByLL(self,lat,lng):
-        # if input is not of correct form, raise error
-        if (type(lat) == float or type(lat) == str) and (type(lng) == float or type(lng) == str):
-            raise ValueError('setByLL(lat,lng) requires lat and lng to both be of type float or str')
-        #else
-        self.lat = str(lat) #sets lat and lng values and sets locSet to true
-        self.lng = str(lng)
-        self.addr = getAddr(lat,lng) #pulls address from google api
-        self.faddr = self.addr
-        self.locSet = True
-        codes = getCT(lat,lng) #pulls tract and county codes from census api
-        self.tractCode = codes['tract']
-        self.countyCode = codes['county']
 
 
 """
