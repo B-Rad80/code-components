@@ -70,12 +70,3 @@ class location():
         if type(name) != str:
             raise ValueError('name must be type str')
         self.applicantName = name
-
-
-
-"""
-userIn = input("Enter Address: \t") #takes input of address
-userLoc = location(userIn) #creates location class using address, which also pulls coordinates from google maps api, and tract and county codes from census api
-print(userLoc.tractCode) #prints tract code
-print(userLoc.countyCode) #prints county code
-"""
