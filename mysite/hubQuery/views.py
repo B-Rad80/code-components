@@ -36,11 +36,8 @@ def massQuery(request):
 			addr2 = form.cleaned_data["addr_in2"]
 			name1 = form.cleaned_data['name_in']
 			name2 = form.cleaned_data['name_in2']
-			loc1 = getInHub.location(addr1)
-			loc1.setName(name1)
-			loc2 = getInHub.location(addr2)
-			loc2.setName(name2)
-			locList = [loc1, loc2]
+			addresses = [[addr1, name1], [addr2, name2]]
+
 			"""
 			Above is just a temporary proof of concept for processing form.
 
@@ -49,11 +46,13 @@ def massQuery(request):
 				- massResponse.html
 				- here
 
-			massResponse.html can take a list of location classes (see getinhub.py)
-			of any size. EG:
-			locList = [loc1, loc2, ... locN]
+			Pass a list of lists of addresses and names as shown above
 			"""
-
+			locList = []
+			for address in addresses:
+				loc = getInHub.location(address[0])
+				loc.setName(address[1])
+				locList.append(loc)
 
             # redirect to a new URL:
 			return render(request, 'app/massResponse.html', {'reqSuccess':True, 'locList':locList})
