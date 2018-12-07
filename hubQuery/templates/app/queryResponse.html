@@ -18,61 +18,74 @@
     <br>
     <br>
     <table cellpadding="10" bgcolor="#f7f7f7">
-      <tr>
-        {% if loc.designated %}
-        <th bgcolor="#B2ED9D" colspan="5">Designated HubZone</th>
-        {% else %}
-        <th bgcolor="#EDAB9D" colspan="5">Not A Designated HubZone</th>
-        {% endif %}
-      </tr>
-      <tr>
-        <td colspan="4">Interpreted Address: {{ loc.faddress }}</td>
-      </tr>
-      <tr>
-        <th colspan="2" bgColor="#ededed">Area</th>
-        <th bgColor="#ededed">Designation</th>
-        <th bgColor="#ededed">More Info</th>
-      </tr>
-      <tr>
-        <th rowspan="2" bgcolor="#ededed">{{ loc.designationInfo.county.name }}</th>
-        <th>2017</th>
-        {% if loc.designationInfo.county.prevYearDes %}
-        <td bgcolor="#B2ED9D">Designated</th>
-        {% else %}
-        <td bgcolor="#EDAB9D">Not Designated</th>
-        {% endif %}
+      {% if loc.error == True %}
+        <tr>
+          <th bgcolor="#EDDF87" colspan="5">ERROR</th>
+        </tr>
+        <tr>
+          <td colspan="4">Interpreted Address: {{ loc.faddress }}</td>
+        </tr>
+        <tr>
+          <td bgcolor="#EDDF87" colspan="4">Error: {{ loc.errorText }}</td>
+        </tr>
 
-        <td>{{ loc.designationInfo.county.prevYearReason }}</td>
-      </tr>
-      <tr>
-        <th>2018</th>
-        {% if loc.designationInfo.county.currYearDes %}
-        <td bgcolor="#B2ED9D">Designated</th>
-        {% else %}
-        <td bgcolor="#EDAB9D">Not Designated</th>
-        {% endif %}
+      {% else %}
+        <tr>
+          {% if loc.designated %}
+          <th bgcolor="#B2ED9D" colspan="5">Designated HubZone</th>
+          {% else %}
+          <th bgcolor="#EDAB9D" colspan="5">Not A Designated HubZone</th>
+          {% endif %}
+        </tr>
+        <tr>
+          <td colspan="4">Interpreted Address: {{ loc.faddress }}</td>
+        </tr>
+        <tr>
+          <th colspan="2" bgColor="#ededed">Area</th>
+          <th bgColor="#ededed">Designation</th>
+          <th bgColor="#ededed">More Info</th>
+        </tr>
+        <tr>
+          <th rowspan="2" bgcolor="#ededed">{{ loc.designationInfo.county.name }}</th>
+          <th>2017</th>
+          {% if loc.designationInfo.county.prevYearDes %}
+          <td bgcolor="#B2ED9D">Designated</th>
+          {% else %}
+          <td bgcolor="#EDAB9D">Not Designated</th>
+          {% endif %}
 
-        <td>{{ loc.designationInfo.county.currYearReason }}</td>
-      </tr>
-      <tr>
-        <th rowspan="2" bgcolor="#ededed">Census Tract</th>
-        <th>2017</th>
+          <td>{{ loc.designationInfo.county.prevYearReason }}</td>
+        </tr>
+        <tr>
+          <th>2018</th>
+          {% if loc.designationInfo.county.currYearDes %}
+          <td bgcolor="#B2ED9D">Designated</th>
+          {% else %}
+          <td bgcolor="#EDAB9D">Not Designated</th>
+          {% endif %}
 
-        {% if loc.designationInfo.tract.prevYearDes %}
-        <td bgcolor="#B2ED9D">Designated</th>
-        {% else %}
-        <td bgcolor="#EDAB9D">Not Designated</th>
-        {% endif %}
-        <td rowspan="2">Census Tract: {{loc.tractCode}}
-      </tr>
-      <tr>
-        <th>2018</th>
-        {% if loc.designationInfo.tract.currYearDes %}
-        <td bgcolor="#B2ED9D">Designated</th>
-        {% else %}
-        <td bgcolor="#EDAB9D">Not Designated</th>
-        {% endif %}
-      </tr>
+          <td>{{ loc.designationInfo.county.currYearReason }}</td>
+        </tr>
+        <tr>
+          <th rowspan="2" bgcolor="#ededed">Census Tract</th>
+          <th>2017</th>
+
+          {% if loc.designationInfo.tract.prevYearDes %}
+          <td bgcolor="#B2ED9D">Designated</th>
+          {% else %}
+          <td bgcolor="#EDAB9D">Not Designated</th>
+          {% endif %}
+          <td rowspan="2">Census Tract: {{loc.tractCode}}
+        </tr>
+        <tr>
+          <th>2018</th>
+          {% if loc.designationInfo.tract.currYearDes %}
+          <td bgcolor="#B2ED9D">Designated</th>
+          {% else %}
+          <td bgcolor="#EDAB9D">Not Designated</th>
+          {% endif %}
+        </tr>
+      {% endif %}
     {% endif %}
   </body>
 </html>

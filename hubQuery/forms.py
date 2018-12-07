@@ -1,6 +1,9 @@
 from django import forms
 
-class TestForm(forms.Form):
+class queryForm(forms.Form):
+    addr_in = forms.CharField(label='addr in', max_length=100)
+
+class massForm(forms.Form):
     addr_in = forms.CharField(label='addr in', max_length=100)
     addr_in2 = forms.CharField(label='addr in', max_length=100)
     name_in = forms.CharField(label='addr in', max_length=100)
@@ -16,7 +19,7 @@ class FileForm(forms.Form):
     (1, ("CVS")),
     (2, ("Docx")),
     (3, ("Automatic"))
-	)	
+	)
 
 	data = forms.FileField()
 
