@@ -1,4 +1,5 @@
 import psycopg2
+import os
 
 def getDesignation(countyCode,tractCode):
     #if type(countyCode) != str or type(tractCode): #if addr is not a string, throws error
