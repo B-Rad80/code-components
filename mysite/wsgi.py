@@ -11,12 +11,9 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-<<<<<<< HEAD
 path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 print(path)
 
-=======
->>>>>>> parent of 2c72038... changed WSGI.py
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
 
 application = get_wsgi_application()
