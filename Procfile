@@ -1,1 +1,1 @@
-web: gunicorn code-components.wsgi
+web: gunicorn mysite.wsgi
