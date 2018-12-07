@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'boards',
     'hubQuery',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

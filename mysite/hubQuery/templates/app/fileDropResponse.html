@@ -1,0 +1,114 @@
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HubZone Mass Query</title>
+  </head>
+  <body>
+    {% if invalid %}
+      <br>
+      <h2 bgcolor="#EDAB9D"> INVALID FORM </h2> 
+      <p> NON:{{ form.non_field_errors }} TYPE:{{ form.type.errors }} FILE:{{ form.file.errors }}
+       ZIP:{{ form.zip.errors }} EXPORT:{{ form.export.errors }} </p>
+      <br>
+    {% endif %}
+    <h1>HubZone Mass Query</h1>
+
+    <form action="/fileQuery/" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      {{ form }}
+       <input type="file" name="data">
+      <button type="submit">Upload</button>
+
+      {% if uploaded_file_url %}
+        <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+      {% endif %}
+
+      <br></br>
+      
+      <h2>File Type</h2>
+      <input type="radio" name="data_type" value="1" checked> CSV<br>
+      <input type="radio" name="data_type" value="2"> Docx<br>
+      <input type="radio" name="data_type" value="3"> Automatic  
+       <h2>MultFiles/Zipped</h2>
+      <input type="radio" name="data_zip" value="1" checked> yes<br>
+      <input type="radio" name="data_zip" value="2" checked> no<br>
+       <h2>Export?</h2>
+      <input type="radio" name="export" value="1" checked> yes<br>
+      <input type="radio" name="export" value="2" checked> no<br>
+      
+    
+
+      <br></br>
+      <input type="submit" value="submit">
+    </form>
+
+    {% if reqSuccess %}
+        <br>
+        <br>
+        <table cellpadding="10" bgcolor="#f7f7f7">
+      {% for loc in locList %}
+
+          <th rowspan="8" bgcolor="#ededed">{{ loc.applicantName }}</th>
+          <tr>
+            {% if loc.designated %}
+            <th bgcolor="#B2ED9D" colspan="5">Designated HubZone</th>
+            {% else %}
+            <th bgcolor="#EDAB9D" colspan="5">Not A Designated HubZone</th>
+            {% endif %}
+          </tr>
+          <tr>
+            <td colspan="4">Interpreted Address: {{ loc.faddress }}</td>
+          </tr>
+          <tr>
+            <th colspan="2" bgColor="#ededed">Area</th>
+            <th bgColor="#ededed">Designation</th>
+            <th bgColor="#ededed">More Info</th>
+          </tr>
+          <tr>
+            <th rowspan="2" bgcolor="#ededed">{{ loc.designationInfo.county.name }}</th>
+            <th>2017</th>
+            {% if loc.designationInfo.county.prevYearDes %}
+            <td bgcolor="#B2ED9D">Designated</th>
+            {% else %}
+            <td bgcolor="#EDAB9D">Not Designated</th>
+            {% endif %}
+
+            <td>{{ loc.designationInfo.county.prevYearReason }}</td>
+          </tr>
+          <tr>
+            <th>2018</th>
+            {% if loc.designationInfo.county.currYearDes %}
+            <td bgcolor="#B2ED9D">Designated</th>
+            {% else %}
+            <td bgcolor="#EDAB9D">Not Designated</th>
+            {% endif %}
+
+            <td>{{ loc.designationInfo.county.currYearReason }}</td>
+          </tr>
+          <tr>
+            <th rowspan="2" bgcolor="#ededed">Census Tract</th>
+            <th>2017</th>
+
+            {% if loc.designationInfo.tract.prevYearDes %}
+            <td bgcolor="#B2ED9D">Designated</th>
+            {% else %}
+            <td bgcolor="#EDAB9D">Not Designated</th>
+            {% endif %}
+            <td rowspan="2">Census Tract: {{loc.tractCode}}
+          </tr>
+          <tr>
+            <th>2018</th>
+            {% if loc.designationInfo.tract.currYearDes %}
+            <td bgcolor="#B2ED9D">Designated</th>
+            {% else %}
+            <td bgcolor="#EDAB9D">Not Designated</th>
+            {% endif %}
+          </tr>
+        {% endfor %}
+    {% endif %}
+  </body>
+</html>
