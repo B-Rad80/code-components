@@ -5,22 +5,35 @@
     margin-top: 60px;
 
 }
+
+h1{
+font-size: 100px;
+text-align: center;
+}
+
+p{
+	margin-top: -40px;
+	font-size: 50px;
+}
+
 body {
     background: white;
 }
 #logo{
-    margin-top: 100px;
-    width:10%;
-    position:fixed;
+    top: 100px;
+		margin-left:-10px;
+    width:20%;
+    //	position:fixed;
 }
     /* Navbar container */
 
 .navbar {
   //overflow: hidden;
+	top: 0px;
   background-color: #565A5C;
   font-family: Arial;
   position:fixed;
-  margin-top:-26px;
+  //margin-top:-26px;
   margin-left: -10px;
 }
 

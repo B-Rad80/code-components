@@ -32,5 +32,6 @@ urlpatterns = [
 	path('polls/', include('polls.urls')),
 	url(r'^hubQuery/$', hubQuery_views.hubQuery, name='hubQuery'),
     url(r'^massQuery/$', hubQuery_views.massQuery, name='massQuery'),
+    url(r'^fileQuery/$', hubQuery_views.fileQuery, name='fileQuery'),
     path('admin/', admin.site.urls),
 ]

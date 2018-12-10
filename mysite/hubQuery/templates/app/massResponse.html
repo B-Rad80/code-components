@@ -9,15 +9,15 @@
   <body>
 
 
-    <div id="bar" style = "background-color: #565A5C; position:fixed; height:50px; width:100%; margin-top: -12px"></div>
+    <div id="bar" style = "background-color: #565A5C; position:fixed; height:50px; width:100%; top: -4px; left: 0px"></div>
 
-    <<div class="navbar">
-  <a href="" style="background-color: #CFB87C">Home</a>
-  <a href="">About Us</a>
-  <a href="">Single Search</a>
-  <a href="">Multi-Search</a>
-  <a href="">Sign In</a>
-  <a href="">Sign Up</a>
+    <div class="navbar">
+  <a href="{% url 'home' %}" style="background-color: #CFB87C">Home</a>
+  <a href="{% url 'aboutUs' %}">About Us</a>
+  <a href="{% url 'hubQuery' %}">Single Search</a>
+  <a href="{% url 'massQuery' %}">Multi-Search</a>
+  <a href="{% url 'signin' %}">Sign In</a>
+  <a href="{% url 'signup' %}">Sign Up</a>
 
 </div>
 
