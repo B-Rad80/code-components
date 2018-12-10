@@ -3,8 +3,24 @@
   <head>
     <meta charset="utf-8">
     <title>HubZone Mass Query</title>
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'hubQuery/Zip.css' %}">
   </head>
   <body>
+
+
+    <div id="bar" style = "background-color: #565A5C; position:fixed; height:50px; width:100%; margin-top: -12px"></div>
+
+    <<div class="navbar">
+  <a href="" style="background-color: #CFB87C">Home</a>
+  <a href="">About Us</a>
+  <a href="">Single Search</a>
+  <a href="">Multi-Search</a>
+  <a href="">Sign In</a>
+  <a href="">Sign Up</a>
+
+</div>
+
     <h1>HubZone Mass Query</h1>
 
     <form action="/massQuery/" method="post">
