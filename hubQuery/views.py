@@ -22,7 +22,8 @@ def hubQuery(request):
 			loc = getInHub.location(addr_in)
             # redirect to a new URL:
 			return render(request, 'app/queryResponse.html', {'reqSuccess':True, 'loc':loc})
-
+		else:
+			return render(request, 'app/queryResponse.html')
     # if a GET (or any other method) we'll create a blank form
 	else:
 		#form = TestForm()
