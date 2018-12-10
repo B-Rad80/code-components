@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
-from .forms import TestForm, FileForm
+from .forms import queryForm, massForm, FileForm
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 import getInHub
@@ -14,7 +14,7 @@ def hubQuery(request):
 	# if this is a POST request we need to process the form data
 	if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-		form = TestForm(request.POST)
+		form = queryForm(request.POST)
         # check whether it's valid:
 		if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -33,7 +33,7 @@ def massQuery(request):
 	# if this is a POST request we need to process the form data
 	if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-		form = TestForm(request.POST)
+		form = massForm(request.POST)
         # check whether it's valid:
 		if form.is_valid():
 			addr1 = form.cleaned_data['addr_in']
@@ -121,9 +121,9 @@ def fileQuery(request):
 				print("no export yet fam")
 			else:
 				print("cool bc I have yet to do this")
-			
+
 			locList = []
-			print(addresses)
+
 			if(addresses != []):
 				for address in addresses[0]:
 					print(address[0])

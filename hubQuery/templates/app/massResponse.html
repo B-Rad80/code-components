@@ -26,9 +26,21 @@
         <br>
         <table cellpadding="10" bgcolor="#f7f7f7">
       {% for loc in locList %}
-
-          <th rowspan="8" bgcolor="#ededed">{{ loc.applicantName }}</th>
+        {% if loc.error %}
           <tr>
+            <th rowspan="3" bgcolor="#EDDF87">{{ loc.applicantName }}</th>
+            <th bgcolor="#EDDF87" colspan="4">ERROR</th>
+          </tr>
+          <tr>
+            <td colspan="4">Interpreted Address: {{ loc.faddress }}</td>
+          </tr>
+          <tr>
+            <td bgcolor="#EDDF87" colspan="4">Error: {{ loc.errorText }}</td>
+          </tr>
+
+        {% else %}
+          <tr>
+            <th rowspan="7" bgcolor="#ededed">{{ loc.applicantName }}</th>
             {% if loc.designated %}
             <th bgcolor="#B2ED9D" colspan="5">Designated HubZone</th>
             {% else %}
@@ -83,7 +95,8 @@
             <td bgcolor="#EDAB9D">Not Designated</th>
             {% endif %}
           </tr>
-        {% endfor %}
+        {% endif %}
+      {% endfor %}
     {% endif %}
   </body>
 </html>

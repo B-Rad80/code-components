@@ -4,9 +4,10 @@ import os
 def getDesignation(countyCode,tractCode):
     #if type(countyCode) != str or type(tractCode): #if addr is not a string, throws error
     #    raise ValueError('countyCode and tractCode must be type str')
-   # DATABASE_URL = os.environ['DATABASE_URL']
+    # DATABASE_URL = os.environ['DATABASE_URL']
 
     #conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
     conn = psycopg2.connect(database="hub_designations", user="django", password="DUHJANGO", host="127.0.0.1", port="5432") #specifies connection details
     cur = conn.cursor() #Creates cursor, which establishes connection
 
