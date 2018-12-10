@@ -91,7 +91,7 @@ def fileQuery(request):
 			Pass a list of lists of addresses and names as shown above
 			"""
 			addresses=[]
-			parse_boi = FileDumpParser.FileDumpParser()
+			parse_boi = FileDumpParser.FileDumpParser(False)
 			if(data_type == "1"):
 				print("type = CSV")
 				if(data_zip == "1"):
@@ -105,6 +105,8 @@ def fileQuery(request):
 				print("type == Docx")
 				if(data_zip == "1"):
 					print('Its Zipped!')
+					tmp = parse_boi.unzip(data)
+					addresses = parse_boi.Text_to_String(tmp)
 				else:
 					print('Not Zipped')
 
@@ -121,11 +123,11 @@ def fileQuery(request):
 				print("cool bc I have yet to do this")
 			
 			locList = []
-			
+			print(addresses)
 			if(addresses != []):
 				for address in addresses[0]:
-					#print(address[0])
-					#print(address[1], "\n\n")
+					print(address[0])
+					print(address[1], "\n\n")
 					loc = getInHub.location(address[1])
 					loc.setName(address[0])
 					locList.append(loc)

@@ -1,30 +1,42 @@
 #FileDumpParser
 import csv
-import os, zipfile, sys, io
+import os, zipfile, sys, io, glob, pyap, docx
 import codecs
 class FileDumpParser:
-
 	def __init__(self):
 		self.og = os.getcwd()
+		self.debug = False
+	def __init__(self, d):
+		self.og = os.getcwd()
+		self.debug = d
+
 
 	def unzip(self, file):
-		cwd = os.path.join(self.og, "ZipFIles")
-		print(cwd)
+		if(self.debug):
+			cwd = os.path.join(self.og, "ZipFIles")
+			print(cwd)
+		if(os.path.isdir(file.name[:-4])):
+			print("directory already exists")
+			return "fuck"
 
+		cwd = self.og
 		os.chdir(cwd) # change directory from working dir to dir with files
-
+		ret = ''
 		if(zipfile.is_zipfile(file)):
+			print("is zip")
 			with zipfile.ZipFile(file,"r") as zip_ref:
-				zip_ref.extractall(cwd)
+				ret = zip_ref.extractall(cwd)
 				zip_ref.close() # close file
-				os.remove(file) # delete zipped file
 		else:
 			print(file, "is not an existing Zipfile!")
+		ret =file.name[:-4]
+		return ret
 
 	def parseCSV(self, file):
-		#file = "CVSFiles/"+ file
-		#cwd = os.path.join(self.og, "mysite/CSVFiles")
-		#print(cwd)
+		#file = "CVSFiles/"+ 
+		if(self.debug):
+			cwd = os.path.join(self.og, "mysite/CSVFiles")
+			print(cwd)
 
 		#os.chdir(cwd)
 		addy_List = []
@@ -33,19 +45,24 @@ class FileDumpParser:
 		io_string = io.StringIO(decoded_file)
 		line_count=0;
 		for row in csv.reader(io_string, delimiter=',', quotechar='|'):
+
 			if(row == []):
 				print(addy_List)
 				print("\n\nNO ADDR LIST \n\n\n\n")
 				print(noAddyList)
 				ret = [addy_List, noAddyList]
 				return ret
+
 			print(line_count)
+
 			if line_count == 0:
 				print('Column names are {", ".join(row)}')
+
 			elif row[3] != "Rejected":
 				if(row[4] != ""):
 					tl = [row[0], row[4]]
 					addy_List.append(tl)
+
 				else:
 					tl = [row[0]]
 					noAddyList.append(tl)
@@ -57,13 +74,75 @@ class FileDumpParser:
 		ret = [addy_List, noAddyList]
 		return ret
 
+	def Address_Search(self,test_address):			#NOT in use
+		addresses = pyap.parse(test_address, country='US')
+		for address in addresses:
+        	# shows found address
+			print(address)
+        	# shows address parts
+			print(address.as_dict())
 
-#TEST Cases
-#heheheheh "bigdumper" .... much funny
-#
-#
-#bigdumper = FileDumpParser()
-#bigdumper.parseCSV("candidates.csv")
-#bigdumper.unzip("Test1.zip")
-#
-#
+	def Docx_to_Text(self,filename): #not in use
+		if(self.debug):
+			#cwd = os.path.join(self.og, "CSVFiles")
+			cwd = self.og
+			print(cwd)
+			print(os.path.isfile(filename))
+
+		doc = docx.Document(filename)
+		fullText = []
+		for para in doc.paragraphs:
+			txt = para.text.encode('ascii', 'ignore')
+			fullText.append(txt)
+		ret =  '\n'.join(fullText)
+		print(ret)
+		return ret
+	def Text_to_String(self, filename):
+		ret =[]
+		noaddylist=[]
+		addylist= []
+		if(self.debug):
+			cwd = os.path.join(self.og, "CSVFiles")
+
+		print(os.path.isdir(filename))
+		print(filename)
+		cwd = os.path.join(self.og, filename)
+		os.chdir(cwd)
+		print(cwd)
+
+		for file in glob.glob('*.txt'):
+			temp = open(file, 'r').read().strip()
+			addresses = []
+			addresses = pyap.parse(temp, country='US')
+			#print(addresses)
+			addy = []
+
+			for address in addresses:
+				addy.append(str(address))
+
+			if(addy == []):
+				print(addy, "no addres!")
+				tlist = [file]
+				noaddylist.append(file)
+			else:
+				print(addy, "found address with name", file)
+				tlist = [file, addy[0]]
+				addylist.append(tlist)
+
+
+			os.remove(file)
+		ret = [addylist , noaddylist]
+		print(ret, "= ret")
+		cwd = os.chdir("../")
+		print(cwd)
+
+		os.rmdir(filename)
+		return ret
+
+
+	#TEST Cases
+	#heheheheh "bigdumper" .... much funny
+#bigdumper = FileDumpParser(True)
+#print(bigdumper.parseCSV("candidates.csv"))
+#print(bigdumper.unzip("Test1.zip"))
+#bigdumper.Address_Search( bigdumper.Text_to_Sting("test1.txt"))
