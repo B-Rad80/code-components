@@ -25,8 +25,10 @@ from hubQuery import views as hubQuery_views
 
 urlpatterns = [
 	url(r'^$', views.home, name='home'),
+	url(r'^aboutUs/$', views.aboutUs, name='aboutUs'),
 	#url(r'^$', TemplateView.as_view(template_name='menu.html')),
 	url(r'^signup/$', accounts_views.signup, name='signup'),
+	url(r'^signin/$', accounts_views.signin, name='signin'),
 	path('polls/', include('polls.urls')),
 	url(r'^hubQuery/$', hubQuery_views.hubQuery, name='hubQuery'),
     url(r'^massQuery/$', hubQuery_views.massQuery, name='massQuery'),

@@ -3,8 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title>HubZone Query</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'hubQuery/Zip.css' %}"/>
   </head>
   <body>
+
+    <div id="bar" style = "background-color: #565A5C; position:fixed; height:50px; width:100%; top: -4px; left: 0px"></div>
+    <div class="navbar">
+    <a href="{% url 'home' %}" style="background-color: #CFB87C">Home</a>
+    <a href="{% url 'aboutUs' %}">About Us</a>
+    <a href="{% url 'hubQuery' %}">Single Search</a>
+    <a href="{% url 'fileQuery' %}">File-Search</a>
+    <a href="{% url 'signin' %}">Sign In</a>
+    <a href="{% url 'signup' %}">Sign Up</a>
+
+    </div>
     <h1>HubZone Query</h1>
 
     <form action="/hubQuery/" method="post">
