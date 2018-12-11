@@ -1,37 +1,27 @@
-/*Zip.css stage */
+/*Zip.css */
 #main {
 	background: white;
     margin-left:11%;
     margin-top: 60px;
 
 }
-
-h1{
-font-size: 100px;
-text-align: center;
-}
-
-p{
-	margin-top: -40px;
-	font-size: 50px;
-}
-
 body {
     background: white;
 }
-
-
 #logo{
-    top: 100px;
-		margin-left:-10px;
-    width:20%;
-    //	position:fixed;
+    margin-top: 100px;
+    width:10%;
+    position:fixed;
 }
     /* Navbar container */
 
+h1{
+	margin-top: 100px;
+}
+
 .navbar {
   //overflow: hidden;
-	top: 0px;
+	top:0px;
   background-color: #565A5C;
   font-family: Arial;
   position:fixed;
