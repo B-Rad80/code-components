@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HubZone Query</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'hubQuery/Zip.css' %}"/>
+  </head>
+  <body>
+
+    <div id="bar" style = "background-color: #565A5C; position:fixed; height:50px; width:100%; top: -4px; left: 0px"></div>
+    <div class="navbar">
+    <a href="{% url 'home' %}" style="background-color: #CFB87C">Home</a>
+    <a href="{% url 'aboutUs' %}">About Us</a>
+    <a href="{% url 'hubQuery' %}">Single Search</a>
+    <a href="{% url 'fileQuery' %}">File-Search</a>
+    <a href="{% url 'signin' %}">Sign In</a>
+    <a href="{% url 'signup' %}">Sign Up</a>
+
+    </div>
+    <h1>HubZone Query</h1>
+
+    <form action="/hubQuery/" method="post">
+      {% csrf_token %}
+      <label for="addr_in">Enter address: </label>
+      <input id="addr_in" type="text" name="addr_in"><br>
+      </br>
+      <input type="submit" value="submit">
+    </form>
+    {% if reqSuccess %}
+    <br>
+    <br>
+    <table cellpadding="10" bgcolor="#f7f7f7">
+      {% if loc.error == True %}
+        <tr>
+          <th bgcolor="#EDDF87" colspan="5">ERROR</th>
+        </tr>
+        <tr>
+          <td colspan="4">Interpreted Address: {{ loc.faddress }}</td>
+        </tr>
+        <tr>
+          <td bgcolor="#EDDF87" colspan="4">Error: {{ loc.errorText }}</td>
+        </tr>
+
+      {% else %}
+        <tr>
+          {% if loc.designated %}
+          <th bgcolor="#B2ED9D" colspan="5">Designated HubZone</th>
+          {% else %}
+          <th bgcolor="#EDAB9D" colspan="5">Not A Designated HubZone</th>
+          {% endif %}
+        </tr>
+        <tr>
+          <td colspan="4">Interpreted Address: {{ loc.faddress }}</td>
+        </tr>
+        <tr>
+          <th colspan="2" bgColor="#ededed">Area</th>
+          <th bgColor="#ededed">Designation</th>
+          <th bgColor="#ededed">More Info</th>
+        </tr>
+        <tr>
+          <th rowspan="2" bgcolor="#ededed">{{ loc.designationInfo.county.name }}</th>
+          <th>2017</th>
+          {% if loc.designationInfo.county.prevYearDes %}
+          <td bgcolor="#B2ED9D">Designated</th>
+          {% else %}
+          <td bgcolor="#EDAB9D">Not Designated</th>
+          {% endif %}
+
+          <td>{{ loc.designationInfo.county.prevYearReason }}</td>
+        </tr>
+        <tr>
+          <th>2018</th>
+          {% if loc.designationInfo.county.currYearDes %}
+          <td bgcolor="#B2ED9D">Designated</th>
+          {% else %}
+          <td bgcolor="#EDAB9D">Not Designated</th>
+          {% endif %}
+
+          <td>{{ loc.designationInfo.county.currYearReason }}</td>
+        </tr>
+        <tr>
+          <th rowspan="2" bgcolor="#ededed">Census Tract</th>
+          <th>2017</th>
+
+          {% if loc.designationInfo.tract.prevYearDes %}
+          <td bgcolor="#B2ED9D">Designated</th>
+          {% else %}
+          <td bgcolor="#EDAB9D">Not Designated</th>
+          {% endif %}
+          <td rowspan="2">Census Tract: {{loc.tractCode}}
+        </tr>
+        <tr>
+          <th>2018</th>
+          {% if loc.designationInfo.tract.currYearDes %}
+          <td bgcolor="#B2ED9D">Designated</th>
+          {% else %}
+          <td bgcolor="#EDAB9D">Not Designated</th>
+          {% endif %}
+        </tr>
+      {% endif %}
+    {% endif %}
+  </body>
+</html>
