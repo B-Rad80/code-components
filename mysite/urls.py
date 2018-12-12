@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include, path
+from django.contrib.auth import views as auth_views
 
 from django.views.generic import TemplateView
 
@@ -25,8 +26,12 @@ from hubQuery import views as hubQuery_views
 
 urlpatterns = [
 	url(r'^$', views.home, name='home'),
+	url(r'^aboutUs/$', views.aboutUs, name='aboutUs'),
 	#url(r'^$', TemplateView.as_view(template_name='menu.html')),
 	url(r'^signup/$', accounts_views.signup, name='signup'),
+    url(r'^loggedin/$', accounts_views.loggedin, name='loggedin'),
+    url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
+	url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
 	path('polls/', include('polls.urls')),
 	url(r'^hubQuery/$', hubQuery_views.hubQuery, name='hubQuery'),
     url(r'^massQuery/$', hubQuery_views.massQuery, name='massQuery'),

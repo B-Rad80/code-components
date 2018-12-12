@@ -8,7 +8,7 @@ def getDesignation(countyCode,tractCode):
 
     #conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
-    conn = psycopg2.connect(database="hub_designations", user="django", password="DUHJANGO", host="127.0.0.1", port="5432") #specifies connection details
+    conn = psycopg2.connect(database="hub_designations", user="django", password="DUHJANGO", host="127.0.0.1", port="5432")
     cur = conn.cursor() #Creates cursor, which establishes connection
 
     #Creates dictionary to hold results. This is conviniently the same format as the dictionary in getInHub.py
