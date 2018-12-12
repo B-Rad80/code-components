@@ -10,12 +10,21 @@
 
     <div id="bar" style = "background-color: #565A5C; position:fixed; height:50px; width:100%; top: -4px; left: 0px"></div>
     <div class="navbar">
+    {% if user.is_authenticated %}
+    <a href="{% url 'loggedin' %}" style="background-color: #CFB87C">Home</a>
+    {% else %}
     <a href="{% url 'home' %}" style="background-color: #CFB87C">Home</a>
+    {% endif %}
     <a href="{% url 'aboutUs' %}">About Us</a>
     <a href="{% url 'hubQuery' %}">Single Search</a>
     <a href="{% url 'fileQuery' %}">File-Search</a>
-    <a href="{% url 'signin' %}">Sign In</a>
+    {% if user.is_authenticated %}
+    <a href="">Welcome, {{user.username}}!</a>
+    <a href="{% url 'logout' %}">Sign Out</a>
+    {% else %}
+    <a href="{% url 'login' %}">Sign In</a>
     <a href="{% url 'signup' %}">Sign Up</a>
+    {% endif %}
 
     </div>
     <h1>HubZone Query</h1>
