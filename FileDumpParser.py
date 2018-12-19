@@ -91,6 +91,8 @@ class FileDumpParser:
             print(address.as_dict())
 
     def Docx_to_Text(self, filename):  # not in use
+        noaddylist = []
+        addylist = []
         if(self.debug):
             #cwd = os.path.join(self.og, "CSVFiles")
             cwd = self.og
@@ -99,13 +101,47 @@ class FileDumpParser:
 
         doc = docx.Document(filename)
         fullText = []
+        store =""
         for para in doc.paragraphs:
-            txt = para.text.encode('ascii', 'ignore')
-            fullText.append(txt)
-        ret = '\n'.join(fullText)
-        print(ret)
-        return ret
+            tmp = para.text
+            print(str(para.text), "this is teh paragraph")
+            store = store + "\n" + tmp
 
+        addresses = []
+        addresses = pyap.parse(store, country='US')
+        # print(addresses)
+        addy = []
+
+        for address in addresses:
+            addy.append(str(address))
+
+        if(addy == []):
+            print(addy[0], "no addres!")
+            tlist = [filename]
+            noaddylist.append(file)
+        else:
+            print(addy[0], "found address with name", filename)
+            tlist = [filename, addy[0]]
+            addylist.append(tlist)
+
+        ret = [addylist, noaddylist]
+        print(ret, "= ret")
+        return ret
+    def read_through_folder(self, filename):
+        ret = []
+        if(self.debug):
+            cwd = os.path.join(self.og, "CSVFiles")
+
+        print(filename, " is path?: ",os.path.isdir(filename))
+        cwd = os.path.join(self.og, filename)
+        os.chdir(cwd)
+        print(cwd)
+
+        for file in glob.glob('*.txt'):
+            ret.append(file)
+
+        return ret
+        
     def Text_to_String(self, filename):
         ret = []
         noaddylist = []
@@ -130,11 +166,11 @@ class FileDumpParser:
                 addy.append(str(address))
 
             if(addy == []):
-                print(addy, "no addres!")
+                print(addy[0], "no addres!")
                 tlist = [file]
                 noaddylist.append(file)
             else:
-                print(addy, "found address with name", file)
+                print(addy[0], "found address with name", file)
                 tlist = [file, addy[0]]
                 addylist.append(tlist)
 
@@ -149,7 +185,8 @@ class FileDumpParser:
 
     # TEST Cases
     # heheheheh "bigdumper" .... much funny
-#bigdumper = FileDumpParser(True)
-# print(bigdumper.parseCSV("candidates.csv"))
+bigdumper = FileDumpParser(True)
+print("Testing...\n")
+print(bigdumper.Docx_to_Text("test1.docx"))
 # print(bigdumper.unzip("Test1.zip"))
 #bigdumper.Address_Search( bigdumper.Text_to_Sting("test1.txt"))
