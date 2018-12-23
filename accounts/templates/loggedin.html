@@ -1,0 +1,39 @@
+<!--menu.html -->
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'boards/CSS/menu.css' %}"/>
+</head>
+<body>
+	<title> The 4orce </title>
+
+  <div id="bar" style = "background-color: #565A5C; position:fixed; height:50px; width:100%; margin-top: -12px"></div>
+  <div class="navbar">
+  {% if user.is_authenticated %}
+  <a href="{% url 'loggedin' %}" style="background-color: #CFB87C">Home</a>
+  {% else %}
+  <a href="{% url 'home' %}" style="background-color: #CFB87C">Home</a>
+  {% endif %}
+  <a href="{% url 'aboutUs' %}">About Us</a>
+  <a href="{% url 'hubQuery' %}">Single Search</a>
+  <a href="{% url 'fileQuery' %}">File-Search</a>
+  {% if user.is_authenticated %}
+  <a href="">Welcome, {{user.username}}!</a>
+  <a href="{% url 'logout' %}">Sign Out</a>
+  {% else %}
+  <a href="{% url 'login' %}">Sign In</a>
+  <a href="{% url 'signup' %}">Sign Up</a>
+  {% endif %}
+  </div>
+
+<img id = "logo" src="{% static 'boards/Pics/T4.png' %}"></img>
+<img id = "band" style="width: 80%; margin-left: -4px" src="{% static 'boards/Pics/hubzones.png' %}"></img>
+<h1>Welcome to our Hubzone Tool!</h1>
+<p>
+With this easy to use tool, you can easily find out if any address is located inside of a hubzone!
+If you don't have a lot to find out, try using our single search. If you have a lot, try our Multi-Search or file drop!
+</p>
+</body>
+
+</html>

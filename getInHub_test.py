@@ -46,13 +46,13 @@ class TextprocTestCase(unittest.TestCase):
 		CTtest1 = {'error':False, 'errorText':"", 'tract':'08013012607', 'county':'08013'}
 		# Maxine case
 		CTtest2 = {'error':False, 'errorText':"", 'tract':'26049011714', 'county':'26049'}
-		test_CT1 = getInHub.getCT('40.002550','-105.256470') 
-		test_CT2 = getInHub.getCT('43.039140','-83.542910') 
+		test_CT1 = getInHub.getCT('40.002550','-105.256470')
+		test_CT2 = getInHub.getCT('43.039140','-83.542910')
 		self.assertDictEqual(test_CT1, CTtest1, "Brandon test case failed")
 		self.assertDictEqual(test_CT2, CTtest2, "Maxine test case failed")
 		#self.addTypeEqualityFunc(typeobj, function)
 
-	def test_getCoord(self): 
+	def test_getCoord(self):
 		TestDict1 = { 'error':False,
 					'errorText':"",
 					'lat':40.0023989,
