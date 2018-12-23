@@ -1,0 +1,11 @@
+CREATE TABLE if not exists county_designations 
+	(county_code text not null, 
+	 county_name text not null, 
+	 july_2017_status text, 
+	 january_2018_status text);
+CREATE TABLE if not exists tract_designations 
+	(tract_code TEXT not null, 
+	 january_2017_status text, 
+	 january_2018_status text);
+	 
+CREATE ROLE hub WITH SUPERUSER LOGIN PASSWORD 'DUHJANGO';
