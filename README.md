@@ -38,7 +38,7 @@ psql
 Postrgres commands: Ill try to make this a script later when I can be more specific with the commands I want
 
 //
-CREATE DATABASE django;
+CREATE DATABASE IF NOT EXISTS django;
 CREATE USER djangouser WITH PASSWORD 'DUHJANGO';
 
 ALTER ROLE djangouser SET client_encoding TO 'utf8';
@@ -86,7 +86,7 @@ Now you're ready to start working, the main code is stored inside the mysite fol
 
 ##### Within PSQL:
 
-    CREATE DATABASE hub_designations;
+    CREATE DATABASE IF NOT EXISTS hub_designations;
 
 ##### Make sure it was created correctly:
 
